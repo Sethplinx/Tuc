@@ -1,0 +1,23 @@
+Chip plh 22v10
+
+;PIN INPUTS
+Pin 2 x
+Pin 3 y
+Pin 4 z
+
+;PIN OUTPUTS
+Pin 14 out1
+Pin 15 out2
+Pin 16 out3 
+
+EQUATIONS
+OUT1=/X
+OUT2=/(/(/Y * /Z) * /( Y * Z))
+OUT3=/(/(/X * /Y) */( X * Y))
+
+SIMULATION
+VECTOR a:=[x y z]
+For i:=0 to 7 do
+	Begin 
+	Setf a:=i
+end

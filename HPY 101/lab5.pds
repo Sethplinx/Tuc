@@ -1,0 +1,55 @@
+chip LAB5 22v10
+
+;Pin inputs
+pin 1 CLK
+pin 2 Left
+pin 3 Right
+
+;pin outputs
+;Left flash
+pin 23 L3
+pin 22 L2
+pin 21 L1
+
+;Right flash
+pin 19 R1
+pin 18 R2
+pin 17 R3
+
+Equations
+L3:=Left * /L3 * L2
+L2:=left * /L3 * L1
+L1:=left * /L3
+
+R3:=right * /R3 * R2 
+R2:=right * /R3 * R1
+R1:=right * /R3 
+
+Simulation 
+vector Flash:=[Left Right]
+
+;setting left, right to 0
+setf /left / right /clk 
+;????
+PRLDF /L3 /L2 /L1 /R3 /R2 /R1
+
+;Using left flash(10)
+setf left /right
+FOR i:=0 to 3 DO
+	BEGIN
+		CLOCKF clk
+	END
+	
+;Using right flash(01)
+setf /left right
+FOR i:=0 to 3 DO
+	BEGIN
+		CLOCKF clk
+	END
+
+;Using the alarm mode(11)
+setf left right
+FOR i:=0 to 3 DO
+	BEGIN
+		CLOCKF clk
+	END
